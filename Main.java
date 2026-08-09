@@ -1,23 +1,29 @@
-package Bnk;
+package Bank;
 
 public class Main {
     public static void main(String[] args) {
         // user Jazz
-        Account myBankAccount = new Account("Jazz");
+        BankAccount myBankAccount = new BankAccount("Jazz");
+        // deposit
         myBankAccount.deposit(100);
         System.out.println("User: " + myBankAccount.getAccountHolder() + " deposited an amount of: " + myBankAccount.getBalance());
+        // withdraw
         myBankAccount.withdraw(50);
         System.out.println("User: " + myBankAccount.getAccountHolder() + " balance after withdrawal: " + myBankAccount.getBalance());
 
         // user Ysabell
-        Account myOtherBankAccount = new Account("Ysabell");
+        BankAccount myOtherBankAccount = new BankAccount("Ysabell");
+        // deposit
         myOtherBankAccount.deposit(100);
-        System.out.println("User: " + myOtherBankAccount.getAccountHolder() +" deposited an amount of: " + myOtherBankAccount.getBalance());
-        myOtherBankAccount.withdraw(200);
-        System.out.println("User: " + myOtherBankAccount.getAccountHolder() +" balance after withdrawal: " + myOtherBankAccount.getBalance());
+        System.out.println("User: " + myOtherBankAccount.getAccountHolder() + " deposited an amount of: " + myOtherBankAccount.getBalance());
+        // withdraw
 
-        Account acc = new SavingsAccount("Jazz", 0.05);
-        acc.deposit(100);        // works — inherited from Account
-        System.out.println(acc.getBalance());
+        boolean success = myOtherBankAccount.withdraw(200); // "success" is a local variable, usable only in this method. 
+        if (!success) {
+            System.out.println("Withdrawal denied: Insufficient funds");
+        } else {
+            System.out.println("Withdrawal successful.");
+        }
+        System.out.println("User: " + myOtherBankAccount.getAccountHolder() + " balance after withdrawal: " + myOtherBankAccount.getBalance());
     }
 }
