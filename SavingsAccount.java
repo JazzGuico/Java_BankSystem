@@ -1,14 +1,17 @@
-package Bnk;
+package Bank;
 
-public class SavingsAccount extends Account {
+public class SavingsAccount extends BankAccount{
     private double interestRate;
 
-    public SavingsAccount(String accountHolder, double interestRate) {
-        super(accountHolder);  // calls Account's constructor
+    // constructor for SavingsAccount class
+    public SavingsAccount(String accountHolder, double interestRate) { 
+        super(accountHolder);
         this.interestRate = interestRate;
     }
 
+    // method to apply interest to the savings account balance
     public void applyInterest() {
-        this.balance += this.balance * this.interestRate;
+        double interestEarned = this.balance * this.interestRate;
+        this.balance += interestEarned;
     }
 }
