@@ -1,6 +1,6 @@
 package Bank;
 
-public class BankAccount {
+public class BankAccount implements Statementable {
     // my  instance variable (located in heap memory. usable only by the methods in this class)
     private String accountHolder;
     protected double balance;
@@ -36,6 +36,11 @@ public class BankAccount {
     return true; // withdrawal succeeded. amount is deducted from balance
     }
 
+    // method to generate a statement for the account
+    public String generateStatement() {
+        return "Account Holder: " + this.accountHolder + ", Balance: " + this.balance;
+    }
+
     // method to return the values from methods (balance)
     public double getBalance() {
         return this.balance;
@@ -44,4 +49,6 @@ public class BankAccount {
     public String getAccountHolder() {
         return this.accountHolder;
     }
+
+
 }
