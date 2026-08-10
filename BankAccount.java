@@ -3,7 +3,7 @@ package Bank;
 public class BankAccount {
     // my  instance variable (located in heap memory. usable only by the methods in this class)
     private String accountHolder;
-    private double balance;
+    protected double balance;
 
     // my constructor 
     public BankAccount(String accountHolder) {
