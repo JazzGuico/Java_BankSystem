@@ -1,48 +1,19 @@
 package Bank;
 
+import java.util.ArrayList;
+import java.util.List;
+
 public class Main {
     public static void main(String[] args) {
-        // user Jazz
-        BankAccount myBankAccount = new BankAccount("Jazz");
-        // deposit
-        boolean check = myBankAccount.deposit(100);
-        if (!check) {
-            System.out.println("Deposit failed.");
-        } else {
-            System.out.println("Deposit succeeded.");
+        List<BankAccount> accounts = new ArrayList<>();
+        accounts.add(new BankAccount("Jazz"));
+        accounts.add(new SavingsAccount("Ysabell", 0.02));
+        accounts.add(new BusinessAccount("Miguel", 5));
+
+        for (BankAccount acc : accounts) {
+            acc.deposit(100);
+            boolean result = acc.withdraw(98); // pick an amount where the fee matters
+            System.out.println(acc.getAccountHolder() + " withdrawal result: " + result + ", balance: " + acc.getBalance());
         }
-
-        System.out.println("User: " + myBankAccount.getAccountHolder() + " deposited an amount of: " + myBankAccount.getBalance());
-
-        // withdraw
-        boolean success = myBankAccount.withdraw(50);
-        if (!success) {
-            System.out.println("Withdrawal denied: Insufficient funds");
-        } else {
-            System.out.println("Withdrawal successful.");
-        }
-        System.out.println("User: " + myBankAccount.getAccountHolder() + " balance after withdrawal: " + myBankAccount.getBalance());
-
-
-
-        // user Ysabell
-        BankAccount myOtherBankAccount = new BankAccount("Ysabell");
-        // deposit
-        myOtherBankAccount.deposit(100);
-        if (!check) {
-            System.out.println("Deposit failed.");
-        } else {
-            System.out.println("Deposit succeeded.");
-        }
-        System.out.println("User: " + myOtherBankAccount.getAccountHolder() + " deposited an amount of: " + myOtherBankAccount.getBalance());
-
-        // withdraw
-        success = myOtherBankAccount.withdraw(-200); 
-        if (!success) {
-            System.out.println("Withdrawal denied: Insufficient funds");
-        } else {
-            System.out.println("Withdrawal successful.");
-        }
-        System.out.println("User: " + myOtherBankAccount.getAccountHolder() + " balance after withdrawal: " + myOtherBankAccount.getBalance());
     }
 }
