@@ -1,5 +1,8 @@
 package Bank;
 
+import java.io.FileWriter;
+import java.io.IOException;
+
 public class BankAccount implements Statementable {
     // my  instance variable (located in heap memory. usable only by the methods in this class)
     private String accountHolder;
@@ -14,7 +17,7 @@ public class BankAccount implements Statementable {
         this.balance = 0;
     }
 
-    // my methods
+    // my methods:
     // deposit method to add money to the account. returns true if deposit is successful, false otherwise
     public boolean deposit(double amount) {
         if (amount <= 0) { //ensures that every deposit amount is a positive number
@@ -46,9 +49,16 @@ public class BankAccount implements Statementable {
         return this.balance;
     }
 
+    // method to return the values from methods (accountHolder)
     public String getAccountHolder() {
         return this.accountHolder;
     }
 
-
+    public void saveStatementToFile(String filename) {
+        try (FileWriter writer = new FileWriter(filename)) {
+            writer.write(generateStatement());
+        } catch (IOException e) {
+            System.err.println("Error occurred while saving statement to file: " + e.getMessage());
+        }
+    }
 }
