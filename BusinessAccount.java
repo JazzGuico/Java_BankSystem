@@ -4,8 +4,8 @@ public class BusinessAccount extends BankAccount {
 
     private double flatFee;
 
-    public BusinessAccount(String accountHolder, double flatFee) {
-        super(accountHolder);
+    public BusinessAccount(String accountHolder, double flatFee, NotificationService notificationService) {
+        super(accountHolder, notificationService);
         this.flatFee = flatFee;
     }
 
