@@ -7,14 +7,19 @@ public class BankAccount implements Statementable {
     // my  instance variable (located in heap memory. usable only by the methods in this class)
     private String accountHolder;
     protected double balance;
+    private NotificationService notificationService; // new field
 
     // my constructor 
-    public BankAccount(String accountHolder) {
+    public BankAccount(String accountHolder, NotificationService notificationService) {
         if (accountHolder == null || accountHolder.trim().isEmpty()) {
         throw new IllegalArgumentException("Account holder name cannot be null or empty.");
-    }
+        }
+        if (notificationService == null) {
+            throw new IllegalArgumentException("Notification service cannot be null.");
+        }
         this.accountHolder = accountHolder;
         this.balance = 0;
+        this.notificationService = notificationService; // stored once, used everywhere
     }
 
     // my methods:
@@ -24,6 +29,7 @@ public class BankAccount implements Statementable {
             return false;
         } else {
             this.balance += amount;
+            this.notificationService.sendNotification(this.accountHolder, "Deposit of " + amount + " successful. New balance: " + this.balance);
             return true;
         }
     }
@@ -36,6 +42,7 @@ public class BankAccount implements Statementable {
         return false;
     }
     this.balance -= amount;
+    this.notificationService.sendNotification(this.accountHolder, "Withdrawal of " + amount + " successful. New balance: " + this.balance);
     return true; // withdrawal succeeded. amount is deducted from balance
     }
 
